@@ -5,6 +5,8 @@ Repositório destinado ao **desenvolvimento da aplicação web do Painel de Indi
 
 A plataforma foi criada para centralizar, exibir e documentar de forma interativa a visualização dos **indicadores fiscais da Secretaria do Tesouro Nacional (STN)** aplicados aos municípios de Pernambuco, além de disponibilizar o acesso direto ao **Anuário Fiscal de 2024**.
 
+LINK ACESSÍVEL: https://pif-seplag.vercel.app/
+
 ## 🛠️ Tecnologias utilizadas:
 - `HTML5` — estruturação semântica de toda a aplicação web;
 - `CSS3` — estilização responsiva, layout modular e componentes visuais;
