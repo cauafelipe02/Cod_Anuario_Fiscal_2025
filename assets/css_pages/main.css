@@ -1,0 +1,28 @@
+@import url("pagina_inicial.css");
+@import url("aside.css");
+
+:root {
+  --bg-sidebar: #00386d;
+  --bg-hover: #162a56;
+  --bg-main: #f4f6f9;
+  --text-muted: #bcbcbd;
+  --text-light: #ffffff;
+  --border-radius: 12px;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+/* Trava o HTML para não gerar rolagem no documento base */
+html {
+    height: 100%;
+    overflow: hidden;
+}
+
+.escondido {
+    display: none !important;
+}

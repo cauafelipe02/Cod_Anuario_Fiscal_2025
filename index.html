@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PFI - SEPLAG</title>
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <link rel="stylesheet" href="./assets/css_pages/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="body_pag_inicial">
+
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="bi bi-boxes"></i>
+            <span>SEPLAG - PE</span>
+        </div>
+
+        <button class="toggle-button" onclick="mudarPagina('esconder')">
+            <i class="bi bi-list"></i>
+        </button>
+
+        <nav class="sidebar-nav">
+            <section class="nav-group">                   
+                <button class="voltar-inicio" onclick="mudarPagina('inicio')">
+                    <i class="bi bi-house-fill"></i>
+                    Inicio
+                </button>
+                
+                <span class="nav-label">INDICADORES STN</span>
+
+                <details class="dropdown">
+                    <summary>
+                        <span class="summary-title">
+                            <i class="fa-solid fa-chart-pie"></i>
+                            <span>Visualizar Indicadores</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+                    </summary>
+                    <ul class="dropdown-list">
+                        <li><button onclick="mudarPagina('indice1')">Indicador 1</button></li>
+                        <li><button onclick="mudarPagina('indice2')">Indicador 2</button></li>
+                        <li><button onclick="mudarPagina('indice3')">Indicador 3</button></li>
+                        <li><button onclick="mudarPagina('indice4')">Indicador 4</button></li>
+                        <li><button onclick="mudarPagina('indice5')">Indicador 5</button></li>
+                        <li><button onclick="mudarPagina('indice6')">Indicador 6</button></li>
+                        <li><button onclick="mudarPagina('indice7')">Indicador 7</button></li>
+                        <li><button onclick="mudarPagina('indice8')">Indicador 8</button></li>
+                    </ul>
+                </details>
+            </section>
+
+            <section class="nav-group">
+                <span class="nav-label">ANUÁRIO FISCAL - 2024</span>
+                <a href="./assets/files/2024 Anuário Fiscal dos Municípios de Pernambuco.pdf" download="2024 Anuário Fiscal dos Municípios de Pernambuco.pdf" class="nav-documentation">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                    <span class="summary-title">Anuário Fiscal 2024</span>
+                </a>
+            </section>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+        <h1>Painel de Indicadores Fiscais.25 STN</h1>
+        </header>
+
+        <div class="content-body">
+            <!-- Artigo da Tabela -->
+            <article class="card" id="card-planilha">
+                <header class="card-header">
+                    <h2>Planilha Final dos Indicadores</h2>
+                </header>
+                <figure class="iframe-wrapper">
+                    <iframe id="iframe-tabela" src="./tabela_final.html"></iframe>
+                </figure>
+            </article>
+
+            <!-- Espaço reservado para a Imagem/Fórmula do Indicador -->
+            <div class="container-formula"></div>
+
+            <!-- Artigo do Código -->
+            <article class="card">
+                <header class="card-header">
+                    <h2 id="titulo-codigo">Arquivo main.R do Projeto</h2>
+                </header>
+                <pre>
+                    <code id="codigo-r" class="language-r">
+    # 1. Carregar todas as bibliotecas necessárias para o projeto
+
+    library(dplyr)
+    library(readxl)
+    library(readr)
+    library(janitor)
+    library(tidyr)
+    library(openxlsx)
+
+    # Importa as etapas na ordem ----------------------------------------------
+
+    source("cod_indicador_1.R")
+    source("cod_indicador_2.R")
+    source("cod_indicador_3.R")
+    source("cod_indicador_4.R")
+    source("cod_indicador_5.R")
+    source("cod_indicador_6.R")
+    source("cod_indicador_7.R")
+    source("cod_indicador_8.R")
+
+    # Exportando para excel ---------------------------------------------------
+
+    # 1. Cria a pasta de trabalho do Excel
+    wb <- createWorkbook()
+    addWorksheet(wb, "Indicadores_STN_25")
+    writeData(wb, "Indicadores_STN_25", base_STN)
+
+    # 2. Estilos para o cabeçalho (Azul escuro com texto branco e negrito)
+    estilo_cabecalho <- createStyle(
+    fgFill = "#1F4E78", 
+    halign = "CENTER", 
+    valign = "CENTER",
+    textDecoration = "BOLD", 
+    fontColour = "#FFFFFF"
+    )
+
+    # Colunas 1 a 3 (Cod_ibge, Municipio, RD): Azul Claro Pastel
+    estilo_identificacao <- createStyle(
+    fgFill = "#DDEBF7",
+    halign = "LEFT",
+    valign = "CENTER"
+    )
+
+    # Colunas 4 a 11 (Indicadores 1 a 8): Amarelo Pastel
+    estilo_indicadores <- createStyle(
+    fgFill = "#FFF2CC",
+    halign = "RIGHT",
+    valign = "CENTER"
+    )
+
+    # Criando o vetor com os índices das colunas dos indicadores
+    colunas_indicadores <- c(6, 8, 11, 15, 18, 21, 24, 26)
+
+    # 3. Aplicação dos Estilos na Planilha
+
+    # Aplica o cabeçalho na Linha 1
+    addStyle(wb, "Indicadores_STN_25", style = estilo_cabecalho, rows = 1, cols = 1:ncol(base_STN), gridExpand = TRUE)
+
+    # Aplica o Azul Claro nas colunas 1 a 3 (da linha 2 até o final dos dados)
+    addStyle(wb, "Indicadores_STN_25", style = estilo_identificacao, rows = 2:(nrow(base_STN) + 1), cols = 1:3, gridExpand = TRUE)
+
+    # Aplica o Amarelo Pastel + % nas colunas dos indicadores (colunas 4 até o final)
+    addStyle(wb, "Indicadores_STN_25", style = estilo_indicadores, rows = 2:(nrow(base_STN) + 1), cols = colunas_indicadores, gridExpand = TRUE)
+
+    # 5. Salvar o arquivo final
+    saveWorkbook(wb, "indicadores_fiscais_2025.xlsx", overwrite = TRUE)
+                    </code>
+                </pre>
+            </article>
+        </div>
+
+    </main>
+    <script type="module" src="./assets/js_pages/main.js"></script>
+</body>
+</html>

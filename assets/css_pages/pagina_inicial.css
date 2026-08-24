@@ -1,0 +1,104 @@
+
+/* Aplica a trava exclusiva na classe da página inicial */
+.body_pag_inicial {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-main);
+    display: flex;
+    align-items: stretch;
+    overflow: hidden; /* Elimina a barra de rolagem externa desta página */
+}
+
+/* === CONTEÚDO PRINCIPAL === */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto; /* Apenas esta área vai rolar */
+}
+
+.topbar {
+  background: #ffffff;
+  padding: 20px 30px;
+  margin-top: 10px;
+  border-bottom: 1px solid #e3e8ee;
+}
+
+.topbar h1 {
+  font-size: 2rem;
+  color: #334155;
+  font-weight: 600;
+}
+
+.content-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* === ARTICLES / CARDS === */
+.card {
+  background: #ffffff;
+  border-radius: var(--border-radius);
+  border: rgba(128, 128, 128, 0.411) 1.2px solid;
+  padding: 25px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  height: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header h2 {
+  font-size: 1.4rem;
+  color: #475569;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.iframe-wrapper {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+iframe {
+  width: 100%;
+  height: 520px; /* Aumentado para acomodar paginação e filtros */
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+iframe#iframe-tabela {
+  width: 90%;
+  height: 550px;
+  border: rgba(128, 128, 128, 0.411) 1.2px solid;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* === BLOCO DE CÓDIGO (PRE & CODE) === */
+pre {
+  margin: 0;
+  padding: 15px;
+  border-radius: 8px !important;
+  max-height: 450px; /* Limita a altura do bloco */
+  overflow-y: auto; /* Cria rolagem INTERNA quando o código for longo */
+  overflow-x: auto; /* Permite rolagem horizontal se a linha for comprida */
+}
+
+pre code {
+  font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre; /* Preserva as quebras de linha e espaços do R */
+}
